@@ -1,0 +1,56 @@
+helm upgrade --install gitlab gitlab/gitlab \
+--timeout 600s \
+-f https://gitlab.com/gitlab-org/charts/gitlab/raw/master/examples/values-minikube-minimum.yaml -b gitlab \
+ --set global.hosts.domain=$(minikube ip).nip.io \
+  --set global.hosts.externalIP=$(minikube ip)
+
+ --set global.hosts.domain=$(minikube ip).nip.io   --set global.hosts.externalIP=$(minikube ip)
+
+
+
+  Fix For Failing Travis Builds
+In the upcoming lecture we will be adding a script to our .travis.yml file. Similar to our previous projects that ran tests using Travis, we need to make sure the tests exit after running and don't cause our builds to fail.
+
+Make sure to change this script:
+
+script:
+  - docker run USERNAME/docker-react npm run test -- --coverage
+To use the CI flag and remove coverage:
+
+script:
+  - docker run -e CI=true USERNAME/docker-react npm run test
+
+
+kubectl create secret generic pgpassword --from-literal PGPASSWORD=mypgpassword123
+
+
+
+Helm v3 Update
+This note is if you wish to use the latest version of Helm, which is now v3. This is a major update, as it removes the use of Tiller.
+
+1. Install Helm v3:
+
+In your Google Cloud Console run the following:
+
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+ 
+link to the docs:
+
+https://helm.sh/docs/intro/install/#from-script
+
+2. Skip the commands run in the following lectures:
+
+Helm Setup, Kubernetes Security with RBAC, Assigning Tiller a Service Account and Ingress-Nginx with Helm. You should still watch these lectures and they contain otherwise useful info.
+
+3. Install Ingress-Nginx:
+
+In your Google Cloud Console run the following:
+
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm install my-release ingress-nginx/ingress-nginx
+ 
+Link to the docs:
+
+https://kubernetes.github.io/ingress-nginx/deploy/#using-helm
