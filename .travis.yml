@@ -19,20 +19,7 @@ before_install:
   - docker build -t navarrochamberlain/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true navarrochamberlain/docker-react npm test
-
-after_success:
- - docker build -t navarrochamberlain/multi-client ./client
- - docker build -t navarrochamberlain/multi-nginx ./nginx
- - docker build -t navarrochamberlain/multi-server ./server
- - docker build -t navarrochamberlain/multi-worker ./worker
- #Login To Docker
- - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
- #Build to Prod
- - docker push navarrochamberlain/multi-client
- - docker push navarrochamberlain/multi-nginx
- - docker push navarrochamberlain/multi-server
- - docker push navarrochamberlain/multi-worker
+  - docker run -e CI=true navarrochamberlain/react-test npm test
 
 deploy:
     provider: script
