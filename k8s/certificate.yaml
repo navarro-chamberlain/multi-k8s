@@ -3,7 +3,7 @@ kind: Certificate
 metadata:
   name: thezenithgroup-org-tls
 spec:
-  secretName: thezenithgroup-org-tls
+  secretName: thezenithgroup-org
   issuerRef: 
     name: letsencrypt-prod
     kind: ClusterIssuer
