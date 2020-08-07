@@ -1,0 +1,21 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: thezenithgroup-org-tls
+spec:
+  secretName: thezenithgroup-org-tls
+  issuerRef: 
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: thezenithgroup.org
+  dnsNames:
+    - thezenithgroup.org
+    - www.thezenithgroup.org
+  acme:
+    config:
+     - http01:
+          ingress:
+            class: nginx
+       domains:
+        - thezenithgroup.org
+        - www.thezenithgroup.org
